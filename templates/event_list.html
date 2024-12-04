@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}Event List{% endblock %}
+
+{% block content %}
+<div class="h-screen flex flex-col items-center  py-6 px-4">
+
+  <!-- Container with scroll -->
+  <div class="w-full max-w-5xl h-full overflow-y-auto">
+    
+    <!-- Upcoming Events -->
+    <div class="mb-6 p-4 bg-white shadow-lg rounded-xl border border-blue-300">
+      <p class="text-4xl font-extrabold text-gray-800 mb-6 border-b-4 border-blue-500 pb-2 font-serif">Upcoming Events</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {% for event in upcoming_events %}
+          <div class="relative bg-white rounded-xl shadow-lg overflow-hidden border border-blue-300 transition-transform transform hover:scale-105">
+            <a href="{% url 'event_detail' event.event_id %}">
+              <img src="{{ event.images.first.image.url }}" alt="{{ event.name }}" class="w-full h-40 object-cover rounded-t-xl">
+            </a>
+            <div class="p-4">
+              <p class="text-xl font-semibold text-gray-800 m-2">{{ event.name }}</p>
+              <p class="text-sm text-gray-600">{{ event.start_date|date:"F j, Y" }}</p>
+            </div>
+            <a href="{% url 'event_detail' event.event_id %}" class="absolute bottom-0 w-full bg-blue-600 text-white text-center py-2 rounded-b-xl hover:bg-blue-700 transition duration-300">
+              View Details
+            </a>
+          </div>
+        {% empty %}
+          <p class="text-gray-600">No upcoming events.</p>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Ongoing Events -->
+    <div class="mb-6 p-4 bg-white shadow-lg rounded-xl border border-green-300">
+      <p class="text-4xl font-extrabold text-gray-800 mb-6 border-b-4 border-green-500 pb-2 font-serif">Ongoing Events</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {% for event in ongoing_events %}
+          <div class="relative bg-white rounded-xl shadow-lg overflow-hidden border border-green-300 transition-transform transform hover:scale-105">
+            <a href="{% url 'event_detail' event.event_id %}">
+              <img src="{{ event.images.first.image.url }}" alt="{{ event.name }}" class="w-full h-40 object-cover rounded-t-xl">
+            </a>
+            <div class="p-4">
+              <p class="text-xl font-semibold text-gray-800 m-2">{{ event.name }}</p>
+              <p class="text-sm text-gray-600">{{ event.start_date|date:"F j, Y" }}</p>
+            </div>
+            <a href="{% url 'event_detail' event.event_id %}" class="absolute bottom-0 w-full bg-green-600 text-white text-center py-2 rounded-b-xl hover:bg-green-700 transition duration-300">
+              View Details
+            </a>
+          </div>
+        {% empty %}
+          <p class="text-gray-600">No ongoing events.</p>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Completed Events -->
+    <div class="mb-6 p-4 bg-white shadow-lg rounded-xl border border-gray-300">
+      <p class="text-4xl font-extrabold text-gray-800 mb-6 border-b-4 border-gray-500 pb-2 font-serif">Completed Events</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {% for event in completed_events %}
+          <div class="relative bg-white rounded-xl shadow-lg overflow-hidden border border-gray-300 transition-transform transform hover:scale-105">
+            <a href="{% url 'event_detail' event.event_id %}">
+              <img src="{{ event.images.first.image.url }}" alt="{{ event.name }}" class="w-full h-40 object-cover rounded-t-xl">
+            </a>
+            <div class="p-4">
+              <p class="text-xl font-semibold text-gray-800 m-2">{{ event.name }}</p>
+              <p class="text-sm text-gray-600">{{ event.start_date|date:"F j, Y" }}</p>
+            </div>
+            <a href="{% url 'event_detail' event.event_id %}" class="absolute bottom-0 w-full bg-gray-600 text-white text-center py-2 rounded-b-xl hover:bg-gray-700 transition duration-300">
+              View Details
+            </a>
+          </div>
+        {% empty %}
+          <p class="text-gray-600">No completed events.</p>
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

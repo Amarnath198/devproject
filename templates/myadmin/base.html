@@ -1,0 +1,178 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Admin{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .notification-dropdown {
+            display: none;
+        }
+        .notification-dropdown.active {
+            display: block;
+        }
+        .notification-content {
+            max-height: 200px; /* Adjust the height as needed */
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body class="bg-body-color dark:bg-dark-body-color">
+    <nav class="fixed top-0 z-50 w-full border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+        <div class="px-3 py-3 lg:px-5 lg:pl-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center justify-start">
+                    <button
+                        data-drawer-target="logo-sidebar"
+                        data-drawer-toggle="logo-sidebar"
+                        aria-controls="logo-sidebar"
+                        type="button"
+                        class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                    >
+                        <span class="sr-only">Open sidebar</span>
+                        <svg
+                            class="w-6 h-6"
+                            aria-hidden="true"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                clip-rule="evenodd"
+                                fill-rule="evenodd"
+                                d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
+                            ></path>
+                        </svg>
+                    </button>
+                    <a href="/" class="flex ml-2 md:mr-24">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100" height="50" version="1.1">
+                            <rect width="100%" height="100%" fill="transparent" />
+                            <text x="20%" y="50%" dy=".3em" text-anchor="middle">
+                                <tspan fill="#2777ff" font-size="30" y="28">B</tspan>
+                                <tspan fill="#2777ff" font-size="30" x="40">G</tspan>
+                                <tspan fill="#2777ff" font-size="30" x="56">I</tspan>
+                            </text>
+                        </svg>
+                    </a>
+                </div>
+                <div class="flex items-center">
+                    <div class="flex items-center ml-3">
+                        <a
+                            href="{% url 'create_department' %}"
+                            class="flex text-sm text-white p-2 bg-blue-600 rounded-full hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-600"
+                        >
+                        Add Department
+                        </a>
+                    </div>
+                    <div class="flex items-center ml-3">
+                        <a
+                            href="{% url 'create_event_type' %}"
+                            class="flex text-white p-2 text-sm bg-blue-600 rounded-full hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-600"
+                        >
+                        Add Event Type
+                        </a>
+                    </div>
+                    <div class="flex items-center ml-3">
+                        <a
+                            href="{% url 'create_event' %}"
+                            class="flex text-white p-2 text-sm bg-blue-600 rounded-full hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-600"
+                        >
+                        Add Event
+                        </a>
+                    </div>
+                    <div class="flex items-center ml-3 relative">
+                        <button id="notification-button" class="text-blue-600 focus:outline-none">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11c0-3.054-1.194-5.94-3.328-8.072C13.313 2.278 11.659 2 10 2c-1.659 0-3.313.278-4.672.928C3.194 5.06 2 7.946 2 11v3.158c0 .416-.162.828-.405 1.137L0 17h5m5 0v1a3 3 0 11-6 0v-1m6 0H4"></path>
+                            </svg>
+                        </button>
+                        {% if user.is_authenticated %}
+                        <div id="notification-dropdown" style="margin-top: 300px;" class="notification-dropdown absolute right-0 mt-12 w-64 bg-white rounded-lg shadow-lg overflow-hidden z-20">
+                            <div class="notification-content py-2">
+                                {% if notifications %}
+                                    {% for notification in notifications %}
+                                        <div class="px-4 py-2 text-gray-800 border-b">
+                                            <p>{{ notification.message }}</p>
+                                            <p class="text-sm text-gray-500">{{ notification.created_at|date:"Y-m-d H:i" }}</p>
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="px-4 py-2 text-gray-800">
+                                        No new notifications
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="flex items-center ml-3">
+                        <a
+                            href="{% url 'logout' %}"
+                            class="flex text-sm bg-blue-600 rounded-full hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-600"
+                        >
+                            <span class="sr-only">Logout</span>
+                            <img
+                                class="w-8 h-8 rounded-full"
+                                src="{% static 'images/exit.png' %}"
+                                alt="logout"
+                            />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <aside
+        id="logo-sidebar"
+        class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+        aria-label="Sidebar"
+    >
+        <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
+            <ul class="space-y-2 font-medium">
+                <li>
+                    <a
+                        href="{% url 'event_type_list' %}"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                        data-tab="inbox"
+                    >
+                        <span class="flex-1 ml-3 whitespace-nowrap">Event Types</span>
+                    </a>
+                </li>
+                <li>
+                    <a
+                        href="{% url 'department_list' %}"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                    >
+                        <span class="flex-1 ml-3 whitespace-nowrap">Departments</span>
+                    </a>
+                </li>
+                <li>
+                    <a
+                        href="{% url 'admin_event_list' %}"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                    >
+                        <span class="flex-1 ml-3 whitespace-nowrap">Events</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+
+    <div class="p-4 sm:ml-64">
+        <div class="p-4 mt-14">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('notification-button').addEventListener('click', function() {
+            var dropdown = document.getElementById('notification-dropdown');
+            dropdown.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

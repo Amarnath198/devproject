@@ -1,0 +1,25 @@
+{% extends 'myadmin/base.html' %}
+{% load static %} 
+{% load widget_tweaks %}
+{% block title %}Create Event Type{% endblock %}
+
+{% block content %}
+<div class="p-6">
+    <h1 class="text-3xl font-semibold mb-6 text-center">Create Event Type</h1>
+    <form method="post" class="space-y-5 m-12">
+        {% csrf_token %}
+
+      
+        <div class="flex flex-col">
+            <label for="{{ form.name.id_for_label }}" class="text-lg font-medium mb-2">Event Type Name</label>
+            {{ form.name|add_class:"border border-gray-300 rounded-lg p-2" }}
+            {% if form.name.errors %}
+                <p class="text-red-600 text-sm mt-1">{{ form.name.errors }}</p>
+            {% endif %}
+        </div>
+
+        
+        <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-200">Create Event Type</button>
+    </form>
+</div>
+{% endblock %}

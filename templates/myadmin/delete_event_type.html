@@ -1,0 +1,17 @@
+{% extends 'myadmin/base.html' %}
+{% load static %} 
+{% block title %}Confirm Delete{% endblock %}
+
+{% block content %}
+<div class="max-w-lg mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
+    <h1 class="text-3xl font-semibold mb-6 text-center">Confirm Deletion</h1>
+    <p class="mb-4 text-center">Are you sure you want to delete the event type "{{ event_type.name }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <div class="text-center">
+            <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-200">Delete</button>
+            <a href="{% url 'event_type_list' %}" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition duration-200">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

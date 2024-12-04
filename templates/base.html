@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Event Management{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .notification-dropdown {
+            display: none;
+        }
+        .notification-dropdown.active {
+            display: block;
+        }
+        .notification-content {
+            max-height: 200px; /* Adjust the height as needed */
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <nav class="bg-blue-600 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div>
+                <a href="/" class="text-white">Home</a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'event_list' %}" class="text-white ml-4">Events</a>
+                    <a href="{% url 'logout' %}" class="text-white ml-4">Logout</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="text-white ml-4">Login</a>
+                    <a href="{% url 'register' %}" class="text-white ml-4">Register</a>
+                {% endif %}
+            </div>
+            {% if user.is_authenticated %}
+            <div class="relative">
+                <button id="notification-button" class="text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11c0-3.054-1.194-5.94-3.328-8.072C13.313 2.278 11.659 2 10 2c-1.659 0-3.313.278-4.672.928C3.194 5.06 2 7.946 2 11v3.158c0 .416-.162.828-.405 1.137L0 17h5m5 0v1a3 3 0 11-6 0v-1m6 0H4"></path>
+                    </svg>
+                </button>
+               
+                <div id="notification-dropdown" class="notification-dropdown absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg overflow-hidden z-20">
+                    <div class="notification-content py-2">
+                        {% if notifications %}
+                            {% for notification in notifications %}
+                                <div class="px-4 py-2 text-gray-800 border-b">
+                                    <p>{{ notification.message }}</p>
+                                    <p class="text-sm text-gray-500">{{ notification.created_at|date:"Y-m-d H:i" }}</p>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="px-4 py-2 text-gray-800">
+                                No new notifications
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+              
+            </div>
+            {% endif %}
+        </div>
+    </nav>
+    <div class="container mx-auto mt-8">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <script>
+        document.getElementById('notification-button').addEventListener('click', function() {
+            var dropdown = document.getElementById('notification-dropdown');
+            dropdown.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Management</title>
+    <link rel="stylesheet" href="{% static 'styles/feature.scss'%}" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  </head>
+  <body class="antialiased bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100">
+    {% include 'header.html' %}
+    <div class="px-4">
+      <div class="flex justify-center items-center mx-auto max-w-2xl flex-col my-12">
+        <h1 class="text-3xl text-center font-custom font-extrabold tracking-tight text-gray-800 dark:text-gray-100 sm:text-4xl md:text-3xl lg:text-4xl xl:text-5xl">
+          Event Management System
+        </h1>
+        <h1 class="text-xl text-center text-gray-700 dark:text-gray-300 font-medium sm:text-2xl md:text-2xl lg:text-3xl xl:text-4xl">
+          &nbsp;<span id="typewriter"></span>
+        </h1>
+      </div>
+      <section class="px-2 shadow py-4 bg-gray-100 dark:bg-gray-800 md:px-0">
+        <div class="container items-center max-w-6xl px-8 mx-auto xl:px-5">
+          <div class="flex flex-wrap items-center sm:-mx-3">
+            <div class="w-full md:w-1/2 md:px-3">
+              <div class="w-full pb-6 space-y-6 sm:max-w-md lg:max-w-lg md:space-y-4 lg:space-y-8 xl:space-y-9 sm:pr-5 lg:pr-0 md:pb-0">
+                <h1 class="text-3xl font-extrabold tracking-tight text-gray-800 dark:text-gray-100 sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl">
+                  <span class="block">What Is This?</span>
+                  <span class="block text-blue-600 text-xl sm:text-3xl md:text-2xl lg:text-2xl xl:text-3xl">An Effective Event Management Tool.</span>
+                </h1>
+                <p class="mx-auto text-base text-gray-700 dark:text-gray-300 sm:max-w-md lg:text-xl md:max-w-3xl">
+                  This Application allows you to create, manage, and participate in events seamlessly. Whether it's a seminar, workshop, or any other event, this tool simplifies the process, making it easy to organize and track your events.
+                </p>
+                <div class="relative flex flex-col sm:flex-row sm:space-x-4">
+                  <a href="{% url 'login' %}" class="flex items-center w-full px-6 py-3 mb-3 text-lg text-white bg-blue-600 rounded-md sm:mb-0 hover:bg-blue-700 sm:w-auto">
+                    Sign In
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </a>
+                  <a href="#" class="flex items-center px-6 py-3 text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 hover:text-gray-800">
+                    Learn More
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="w-full md:w-1/2">
+              <div class="w-full h-auto overflow-hidden rounded-md shadow-xl sm:rounded-xl">
+                <img class="w-full h-auto" src="{% static 'images/group.jpg' %}" alt="Event Management" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="feature-1 py-6 md:py-12">
+        <div class="container px-4 mx-auto">
+          <div class="flex -mx-4">
+            <div class="px-4 text-center md:w-10/12 xl:w-8/12 mx-auto">
+              <h1 id="features" class="mb-4 text-4xl font-medium text-gray-800 dark:text-gray-100">
+                Discover Our Features
+              </h1>
+              <p class="mb-4 text-xl text-gray-700 dark:text-gray-300">
+                At our institution, we understand the importance of providing top-notch services for event management. Here are some of the key features that make our Event Management system stand out:
+              </p>
+            </div>
+          </div>
+          <div class="md:flex md:-mx-4 mt-12 md:pt-4">
+            <div class="px-4 md:w-1/3 mt-6 md:mt-0">
+              <div class="feature-box text-center p-4 md:p-6 max-w-sm mx-auto border-2 border-solid border-gray-300 rounded md:h-full bg-green-100 dark:bg-green-800">
+                <h5 class="text-xl font-medium mb-4 text-gray-800 dark:text-gray-100">Easy Event Organization</h5>
+                <p class="mb-3 text-gray-700 dark:text-gray-300">
+                  Our intuitive interface ensures a seamless and hassle-free experience, making it easy for staff to organize events efficiently.
+                </p>
+              </div>
+            </div>
+            <div class="px-4 md:w-1/3 mt-6 md:mt-0">
+              <div class="feature-box text-center p-4 md:p-6 max-w-sm mx-auto border-2 border-solid border-gray-300 rounded md:h-full bg-green-100 dark:bg-green-800">
+                <h5 class="text-xl font-medium mb-4 text-gray-800 dark:text-gray-100">Event Tracking</h5>
+                <p class="mb-3 text-gray-700 dark:text-gray-300">
+                  Easily track and manage event details, participants, and schedules all in one place.
+                </p>
+              </div>
+            </div>
+            <div class="px-4 md:w-1/3 mt-6 md:mt-0">
+              <div class="feature-box text-center p-4 md:p-6 max-w-sm mx-auto border-2 border-solid border-gray-300 rounded md:h-full bg-green-100 dark:bg-green-800">
+                <h5 class="text-xl font-medium mb-4 text-gray-800 dark:text-gray-100">Notifications</h5>
+                <p class="mb-3 text-gray-700 dark:text-gray-300">
+                  Stay updated with timely notifications about event updates, reminders, and more.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <section>
+        <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+          <div class="max-w-screen-lg text-gray-700 sm:text-lg dark:text-gray-300">
+            <h2 id="howtouse" class="mb-4 text-4xl tracking-tight font-bold text-gray-800 dark:text-gray-100">
+              How to Use Our
+              <span class="font-extrabold">Event Management System</span>
+            </h2>
+            <p class="mb-4 font-medium">
+              <strong class="font-bold underline">Log In:</strong> Access the system by logging in with your credentials.
+            </p>
+            <p class="mb-4 font-medium">
+              <strong class="font-bold underline">Dashboard:</strong> After logging in, you'll be taken to your dashboard. Here, you can see an overview of your events, upcoming schedules, and notifications.
+            </p>
+            <p class="mb-4 font-medium">
+              <strong class="font-bold underline">Create an Event:</strong>
+              To create an event, click on the "Create Event" button. Fill in the required details, such as the event type, name, dates, and description.
+            </p>
+            <p class="mb-4 font-medium">
+              <strong class="font-bold underline">Review and Confirm:</strong>
+              Before submitting, review the event details to ensure everything is accurate. Once confirmed, your event will be added to the system.
+            </p>
+            <p class="mb-4 font-medium">
+              <strong class="font-bold underline">Track and Manage:</strong>
+              Use the dashboard to manage your events. Track participant enrollments, send notifications, and update event details as needed.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="py-8 bg-gray-50 dark:bg-gray-900 lg:py-16">
+        <div class="max-w-screen-xl px-4 mx-auto text-center">
+          <div class="max-w-screen-sm mx-auto">
+            <h2 class="mb-4 text-4xl font-extrabold leading-tight tracking-tight text-gray-800 dark:text-gray-100">
+              Get Started Now!
+            </h2>
+            <p class="mb-6 font-medium text-gray-700 dark:text-gray-300 lg:mb-8 md:text-lg lg:text-xl">
+              Join us and take your event management experience to the next level. Sign up today to create and manage your events efficiently.
+            </p>
+            <a href="{% url 'register' %}" class="px-5 py-3 font-medium text-lg text-white bg-green-600 rounded-lg hover:bg-green-700 focus:ring-4 focus:ring-green-300 dark:focus:ring-green-800">
+              Sign Up Now
+            </a>
+          </div>
+        </div>
+      </section>
+      <footer class="py-4 bg-gray-200 dark:bg-gray-800">
+        <div class="container mx-auto text-center text-gray-700 dark:text-gray-300">
+          <p class="text-sm">&copy; 2024 Event Management System. All rights reserved.</p>
+        </div>
+      </footer>
+    </div>
+    {% include 'footer.html' %}
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const typewriterElement = document.getElementById('typewriter');
+        const typewriterTexts = ["Create. Manage. Succeed.", "Streamline Your Events.", "Engage with Ease."];
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function type() {
+          const currentText = typewriterTexts[textIndex];
+          const displayedText = isDeleting ? currentText.substring(0, charIndex--) : currentText.substring(0, charIndex++);
+
+          typewriterElement.innerHTML = displayedText;
+
+          if (!isDeleting && charIndex === currentText.length) {
+            isDeleting = true;
+            setTimeout(type, 2000);
+          } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            textIndex = (textIndex + 1) % typewriterTexts.length;
+            setTimeout(type, 500);
+          } else {
+            setTimeout(type, isDeleting ? 100 : 200);
+          }
+        }
+        type();
+      });
+    </script>
+  </body>
+</html>
